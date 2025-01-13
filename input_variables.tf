@@ -1,6 +1,9 @@
 variable lambda_function_name {
     description = "Name of the lambda function"
     type = string
+    # validation {
+        
+    # }
 }
 
 variable sportsbook_website_url {

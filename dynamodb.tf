@@ -6,6 +6,12 @@ module "dynamodb-table" {
   version = "4.2.0"
   name     = var.dynambodb_table_name
   hash_key = "game-id"
+  attributes = [
+    {
+      name = "game-id"
+      type = "S"
+    }
+  ]
   deletion_protection_enabled = true
   tags = {
     Terraform   = "true"
