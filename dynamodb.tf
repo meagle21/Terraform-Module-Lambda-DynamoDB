@@ -1,20 +1,40 @@
 locals {
   odds_type = var.team_odds_bool ? "Team" : "Player"
 }
+
+variable hash_key {
+  type = string
+  default = "game-id"
+}
+
+variable module_version {
+  type = string
+  default = "4.2.0"
+}
+
+variable hash_key_data_type {
+  type = string
+  default = "S"
+}
+
+variable deletion_protection_boolean {
+  type = bool
+  default = true
+}
+
 module "dynamodb-table" {
   source  = "terraform-aws-modules/dynamodb-table/aws"
-  version = "4.2.0"
+  version = var.version
   name     = var.dynambodb_table_name
-  hash_key = "game-id"
+  hash_key = var.hash_key
   attributes = [
     {
-      name = "game-id"
-      type = "S"
+      name = var.hash_key
+      type = var.hash_key_data_type
     }
   ]
-  deletion_protection_enabled = true
+  deletion_protection_enabled = var.deletion_protection_boolean
   tags = {
-    Terraform   = "true"
     Sportsbook = var.sportsbook
     Sport = var.sport
     Odds_type = local.odds_type

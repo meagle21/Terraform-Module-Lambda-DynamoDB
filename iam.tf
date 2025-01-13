@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "assume_role" {
 
     principals {
       type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
+      identifiers = [aws_lambda_function.lambda_function.arn]
     }
 
     actions = ["sts:AssumeRole"]
