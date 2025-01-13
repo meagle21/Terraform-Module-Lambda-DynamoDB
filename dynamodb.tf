@@ -7,11 +7,6 @@ variable hash_key {
   default = "game-id"
 }
 
-variable module_version {
-  type = string
-  default = "4.2.0"
-}
-
 variable hash_key_data_type {
   type = string
   default = "S"
@@ -24,7 +19,7 @@ variable deletion_protection_boolean {
 
 module "dynamodb-table" {
   source  = "terraform-aws-modules/dynamodb-table/aws"
-  version = var.version
+  version = "4.2.0"
   name     = var.dynambodb_table_name
   hash_key = var.hash_key
   attributes = [
