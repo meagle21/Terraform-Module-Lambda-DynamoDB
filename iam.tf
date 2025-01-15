@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "assume_role" {
 
     principals {
       type        = "Service"
-      identifiers = [aws_lambda_function.lambda_function.arn]
+      identifiers = ["lambda.amazonaws.com"]
     }
 
     actions = ["sts:AssumeRole"]
@@ -33,7 +33,7 @@ resource "aws_iam_role" "iam_for_lambda" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
-resource "aws_iam_policy" "lambda_dynamodb_write_policy" {
+resource "aws_iam_policy" "lambda_policy_document" {
   name        = "lambda-dynamodb-write-policy"
   description = "Policy to allow Lambda to write data to DynamoDB"
   
@@ -54,7 +54,12 @@ resource "aws_iam_policy" "lambda_dynamodb_write_policy" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_dynamodb_attachment" {
-  policy_arn = aws_iam_policy.lambda_dynamodb_write_policy.arn
+resource "aws_iam_policy" "lambda_policy" {
+  name   = "lambda-policy"
+  policy = data.aws_iam_policy_document.lambda_policy_document.json
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
   role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = aws_iam_policy.lambda_policy.arn
 }
