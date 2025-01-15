@@ -1,8 +1,18 @@
-variable lambda_permissions_list {
+variable dynamodb_lambda_permissions_list {
     description = "Permissions for the Lambda function"
     type = list
-    default = ["dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:BatchWriteItem", "ecr:GetDownloadUrlForLayer",
-               "ecr:BatchGetImage", "logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
+    default = ["dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:BatchWriteItem"]
+}
+
+variable ecr_permissions_list {
+    description = "Permissions for the Lambda function"
+    type = list
+    default = ["ecr:BatchGetImage", "ecr:GetDownloadUrlForLayer"]
+}
+//, "logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"
+
+variable allow_string {
+  default = "Allow"
 }
 
 data "aws_iam_policy_document" "assume_role" {
@@ -31,9 +41,14 @@ resource "aws_iam_policy" "lambda_dynamodb_write_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action   = var.lambda_permissions_list
-        Effect   = "Allow"
+        Action   = var.dynamodb_lambda_permissions_list
+        Effect   = var.allow_string
         Resource = module.dynamodb-table.dynamodb_table_arn
+      },
+      {
+        Action   = var.ecr_permissions_list
+        Effect   = var.allow_string
+        Resource = [aws_ecr_repository.repo.arn]
       }
     ]
   })
