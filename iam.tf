@@ -1,11 +1,17 @@
+variable lambda_permissions_list {
+    description = "Permissions for the Lambda function"
+    type = list
+    default = ["dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:BatchWriteItem", "ecr:GetDownloadUrlForLayer",
+               "ecr:BatchGetImage", "logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
+}
+
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"
 
     principals {
       type        = "Service"
-      //identifiers = [aws_lambda_function.lambda_function.arn]
-      identifiers = ["lambda.amazonaws.com"]
+      identifiers = [aws_lambda_function.lambda_function.arn]
     }
 
     actions = ["sts:AssumeRole"]
@@ -25,11 +31,7 @@ resource "aws_iam_policy" "lambda_dynamodb_write_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action   = [
-          "dynamodb:PutItem",
-          "dynamodb:UpdateItem",
-          "dynamodb:BatchWriteItem"
-        ]
+        Action   = var.lambda_permissions_list
         Effect   = "Allow"
         Resource = module.dynamodb-table.dynamodb_table_arn
       }
