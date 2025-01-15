@@ -19,7 +19,7 @@ code snippet that shows how this can be used.
 
 ``` 
 module draftkings_basketball_team_api {
-    source = "github.com/meagle21/Terraform-Module-Lambda-DynamoDB-Odds-Comparison"
+    source = "github.com/meagle21/Terraform-Module-Lambda-DynamoDB"
     lambda_function_name = "draftkings_scraping_lambda_nba_team"
     sportsbook_website_url = "https://sportsbook.draftkings.com/leagues/basketball/nba" //nullable
     dynambodb_table_name = "draftkings-basketball-team-odds"  
