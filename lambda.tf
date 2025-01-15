@@ -1,7 +1,7 @@
 variable package_type {
     description = "Name of the lambda function"
     type = string
-    default = "image"
+    default = "Image"
 }
 
 variable snap_start_setting {
