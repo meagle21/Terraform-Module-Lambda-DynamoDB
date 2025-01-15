@@ -13,15 +13,19 @@ This module provisions a Lambda function, DynamoDB table, IAM policies, CloudWat
 While the module is tailored to my specific use case, it is designed to be somewhat flexible and can be used in any project that requires a configured Lambda-DynamoDB connection with proper permissions. Simply input the relevant variables to adapt it to your needs.
 
 ## Usage Guide
+
+I have made some variable nullable so that this module could be used in other situations. Nullable variables are commented on in the example
+code snippet that shows how this can be used. 
+
 ``` 
 module draftkings_basketball_team_api {
     source = "github.com/meagle21/Terraform-Module-Lambda-DynamoDB-Odds-Comparison"
     lambda_function_name = "draftkings_scraping_lambda_nba_team"
-    sportsbook_website_url = "https://sportsbook.draftkings.com/leagues/basketball/nba"
-    dynambodb_table_name = "draftkings-basketball-team-odds"
-    sportsbook = "DraftKings"
-    sport = "Basketball"
-    team_odds_bool = false
+    sportsbook_website_url = "https://sportsbook.draftkings.com/leagues/basketball/nba" //nullable
+    dynambodb_table_name = "draftkings-basketball-team-odds"  
+    sportsbook = "DraftKings" //nullable
+    sport = "Basketball" //nullable
+    team_odds_bool = false //nullable
 } 
 ```
 
