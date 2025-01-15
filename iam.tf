@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "lambda_policy_document" {
   statement {
     effect    = var.allow_string
     actions   = var.dynamodb_lambda_permissions_list
-    resources = [aws_dynamodb_table.lambda_table.arn]
+    resources = [module.dynamodb-table.dynamodb_table_arn]
   }
 
   statement {
