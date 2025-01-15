@@ -27,4 +27,4 @@ module draftkings_basketball_team_api {
 ```
 
 ## What the System Looks Like:
-![image](Deployed Resources.png)
+![image](Deployed%20Resources.png)
