@@ -8,10 +8,9 @@
   - [What the System Looks Like:](#what-the-system-looks-like)
 
 ## Overview 
-This module creates a lambda, dynamodb, iam policies, log group and ECR registry that have all the proper permissions. I created this module 
-to help me with a project that requires I generate lambdas and dynamodbs for various sportsbooks to query odds data. This module allows me to 
-easily input variables to customize the module to whatever sportsbooks/sport I'm querying for. While this module is somewhat specific to my 
-use case, it is possible to use this module for any project where you need a configured lambda/dynamodb connection. 
+This module provisions a Lambda function, DynamoDB table, IAM policies, CloudWatch Log Group, and an ECR registry with the necessary permissions. I originally created this module to streamline the deployment of Lambdas and DynamoDB tables for a project that queries odds data from various sportsbooks. By leveraging this module, I can easily customize the configuration for different sportsbooks or sports.
+
+While the module is tailored to my specific use case, it is designed to be somewhat flexible and can be used in any project that requires a configured Lambda-DynamoDB connection with proper permissions. Simply input the relevant variables to adapt it to your needs.
 
 ## Usage Guide
 ``` 
