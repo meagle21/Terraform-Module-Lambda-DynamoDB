@@ -9,7 +9,12 @@ variable ecr_permissions_list {
     type = list
     default = ["ecr:BatchGetImage", "ecr:GetDownloadUrlForLayer"]
 }
-//, "logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"
+
+variable logging_permissions_list {
+    description = "Permissions for the Lambda function"
+    type = list
+    default = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
+}
 
 variable allow_string {
   default = "Allow"
@@ -44,6 +49,12 @@ data "aws_iam_policy_document" "lambda_policy_document" {
     effect    = var.allow_string
     actions   = var.ecr_permissions_list
     resources = [aws_ecr_repository.repo.arn]
+  }
+
+  statement {
+    effect = var.allow_string
+    actions = var.logging_permissions_list 
+    resources = [aws_cloudwatch_log_group.lambda_logging.arn]
   }
 }
 
