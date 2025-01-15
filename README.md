@@ -4,13 +4,14 @@
 - [Terraform-Module-Lambda-DynamoDB](#terraform-module-lambda-dynamodb)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
-  - [Features](#features)
   - [Usage Guide](#usage-guide)
   - [What the System Looks Like:](#what-the-system-looks-like)
 
 ## Overview 
-
-## Features
+This module creates a lambda, dynamodb, iam policies, log group and ECR registry that have all the proper permissions. I created this module 
+to help me with a project that requires I generate lambdas and dynamodbs for various sportsbooks to query odds data. This module allows me to 
+easily input variables to customize the module to whatever sportsbooks/sport I'm querying for. While this module is somewhat specific to my 
+use case, it is possible to use this module for any project where you need a configured lambda/dynamodb connection. 
 
 ## Usage Guide
 ``` 
