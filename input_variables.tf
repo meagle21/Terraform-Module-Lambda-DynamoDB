@@ -7,7 +7,7 @@ variable lambda_function_name {
 variable sportsbook_website_url {
     description = "URL of the sportsbook"
     type = string
-    nullable = false
+    nullable = true
 }
 
 variable dynambodb_table_name {
