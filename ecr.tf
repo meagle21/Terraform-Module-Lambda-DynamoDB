@@ -5,3 +5,7 @@ resource "aws_ecr_repository" "repo" {
     scan_on_push = true
   }
 }
+
+output "ecr_repo_url" {
+  value = aws_ecr_repository.repo.repository_url
+}
